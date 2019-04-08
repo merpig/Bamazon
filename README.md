@@ -12,9 +12,8 @@ node application with sql
 ### Programs
 - ```bamazonCustomer```
  A customer can enter the id of the item they'd like to purchase and then enters the quantity they'd like to purchase. The console lets the user know how much their purchase costs if the request was valid.
- 
- Image ex:
- <img src="images/customer1.png" alt="customer1 image" width="400px">
+ ### Images
+ <img src="images/customer1.png" alt="customer1 image">
 - ```bamazonManager```
 
 - ```bamazonSupervisor```
