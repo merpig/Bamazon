@@ -4,7 +4,7 @@ var cTable = require('console.table');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '123mumnon123',
+    password: 'password',//Enter your db password here
     database: 'bamazon_db'
 });
 
@@ -13,6 +13,7 @@ function init(){
     openingFunctions();
 }
 
+// Lists the functions available to the supervisor
 function openingFunctions(){
     inquirer
         .prompt([
@@ -39,6 +40,7 @@ function openingFunctions(){
             }
         });
 }
+
 
 function productSaleByDep(){
     var tableArray = [];
@@ -133,6 +135,8 @@ function addItemToDb(depName,depOverhead){
         });
 }
 
+// Borrowed from Stackoverflow, lots of answers but this one seemed most accurate
+// https://stackoverflow.com/questions/4187146/truncate-number-to-two-decimal-places-without-rounding/11818658
 function toFixedTrunc(value, n) {
     const v = value.toString().split('.');
     if (n <= 0) return v[0];
