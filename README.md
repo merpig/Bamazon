@@ -16,7 +16,18 @@ node application with sql
  - The program initializes with a listing of all items for sale with quantity greater than 0.
  ### Images
  <img src="images/customer1.png" alt="customer1 image">
- 
-```bamazonManager```
-
+ <hr>  
+```bamazonManager```  
+- A manager has 5 functions to work with:  
+```View Product for Sale``` Displays a listing of all items for sale.  
+```View Low Inventory``` Displays a listing off items for sale with quantity less than 5.  
+```Add to inventory``` Allows the manager to increase the quantity of an item by giving the program the item id and the amount to be added.  
+```Add new Product``` Allows the manager to add a new product by entering product name,department,price, and quantity.  
+### Images  
+<img src="images/manager1.png" alt="manager1 image">  
+<img src="images/manager2.png" alt="manager2 image">  
+<img src="images/manager3.png" alt="manager3 image">  
+<img src="images/manager4.png" alt="manager4 image">  
+<img src="images/manager5.png" alt="manager5 image">  
+<hr>  
 ```bamazonSupervisor```
