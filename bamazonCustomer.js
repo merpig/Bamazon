@@ -21,7 +21,7 @@ function displayItems(){
         function (error, results) {
             if (error) throw error;
             results.forEach(element => {
-                console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: " + element.price + "|| Quantity: " + element.stock_quantity);
+                console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: $" + element.price + " || Quantity: " + element.stock_quantity);
             });
             selectItem();
         });
@@ -64,7 +64,7 @@ function selectQuantity(id){
 }
 
 function validateOrder(id,quantity){
-    //console.log("You'd like to buy item with id: " + id + " and quantity: " + quantity);
+//console.log("You'd like to buy item with id: " + id + " and quantity: " + quantity);
     connection.query({
         sql: 'SELECT * FROM products WHERE stock_quantity >= ? AND item_id=?',
         values: [quantity,id]
@@ -77,8 +77,8 @@ function validateOrder(id,quantity){
                 return;
             }
             var newQuantity = results[0].stock_quantity-quantity;
-            console.log("New item quantity will be: " + newQuantity);
-            console.log("Your order costs a total of: $" + parseFloat(results[0].price)*quantity);
+            //console.log("New item quantity will be: " + newQuantity);
+            console.log("Your order costs a total of: $" + toFixedTrunc((parseFloat(results[0].price)*quantity),2));
             updateDb(newQuantity,id);
         });
 }
@@ -92,6 +92,17 @@ function updateDb(newQuantity,id){
             if (error) throw error;
             connection.end();
         });
+}
+
+// Borrowed from Stackoverflow, lots of answers but this one seemed most accurate
+// https://stackoverflow.com/questions/4187146/truncate-number-to-two-decimal-places-without-rounding/11818658
+function toFixedTrunc(value, n) {
+    const v = value.toString().split('.');
+    if (n <= 0) return v[0];
+    let f = v[1] || '';
+    if (f.length > n) return `${v[0]}.${f.substr(0,n)}`;
+    while (f.length < n) f += '0';
+    return `${v[0]}.${f}`
 }
 
 init();

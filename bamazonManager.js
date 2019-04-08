@@ -35,6 +35,7 @@ function openingFunctions(){
                     selectItem();
                     break;
                 case 'Add New Product':
+                    addItemName();
                     break;
                 case 'Exit':
                     connection.end();
@@ -52,7 +53,7 @@ function displayProducts(){
         function (error, results) {
             if (error) throw error;
             results.forEach(element => {
-                console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: " + element.price + "|| Quantity: " + element.stock_quantity);
+                console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: $" + element.price + "|| Quantity: " + element.stock_quantity);
             });
             openingFunctions();
         });
@@ -65,7 +66,7 @@ function displayLow(){
         function (error, results) {
             if (error) throw error;
             results.forEach(element => {
-                console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: " + element.price + "|| Quantity: " + element.stock_quantity);
+                console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: $" + element.price + "|| Quantity: " + element.stock_quantity);
             });
             openingFunctions();
         });
@@ -93,7 +94,7 @@ function selectItem(){
                 function (error, results) {
                     if (error) throw error;
                     results.forEach(element => {
-                        console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: " + element.price + "|| Quantity: " + element.stock_quantity);
+                        console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: $" + element.price + " || Quantity: " + element.stock_quantity);
                     });
                     increaseQuantity(results[0].stock_quantity,answers.id);
                 });
@@ -127,6 +128,111 @@ function increaseQuantity(quantity,id){
                     openingFunctions();
                 });
         });
+}
+
+function addItemName(){
+    inquirer
+        .prompt([
+            {
+                name: "itemName",
+                message: "Name of item you'd like to add: ",
+                type: "input",
+            }
+        ])
+        .then(answers => {
+            addItemDepartment(answers.itemName);
+        });
+}
+
+function addItemDepartment(name){
+    inquirer
+        .prompt([
+            {
+                name: "itemDepartment",
+                message: "Department of item: ",
+                type: "input",
+            }
+        ])
+        .then(answers => {
+            addItemPrice(name,answers.itemDepartment);
+        });
+}
+
+function addItemPrice(name,department){
+    inquirer
+        .prompt([
+            {
+                name: "itemPrice",
+                message: "Price of item: ",
+                type: "input",
+                validate: function validateInput(itemPrice){
+                    if(!parseFloat(itemPrice)) return false;
+                    if(parseFloat(itemPrice) < 0.0) return false;
+                    return true;
+                }
+            }
+        ])
+        .then(answers => {
+            var fixedPrice = toFixedTrunc(parseFloat(answers.itemPrice),2);
+            addItemQuantity(name,department,fixedPrice);
+        });
+}
+
+function addItemQuantity(name,department,price){
+    inquirer
+        .prompt([
+            {
+                name: "quantity",
+                message: "Quantity of item: ",
+                type: "input",
+                validate: function validateInput(quantity){
+                    if(!parseInt(quantity)) return false;
+                    if(parseInt(quantity)<0) return false;
+                    return true;
+                }
+            }
+        ])
+        .then(answers => {
+            addItemToDb(name,department,price,answers.quantity);
+        });
+}
+
+function addItemToDb(name,department,price,quantity){
+    var buildItem = "Item: " + name + " || Department: " + department + " || Price: " + price + " || Quantity: " + quantity;
+    inquirer
+        .prompt([
+            {
+                name: "option",
+                message: "Correct?: " + buildItem,
+                type: "list",
+                choices: ['Yes', 'No']
+            }
+        ])
+        .then(answers => {
+            if(answers.option === 'Yes'){
+                connection.query({
+                    sql: 'INSERT INTO products(product_name,department_name,price,stock_quantity) VALUES (?,?,?,?)',
+                    values: [name,department,parseFloat(price),parseInt(quantity)]
+                },
+                    function (error, results) {
+                        if (error) throw error;
+                        console.log("Number of records inserted: " + results.affectedRows);
+                        openingFunctions();
+                    });
+            }
+            else return;
+        });
+}
+
+// Borrowed from Stackoverflow, lots of answers but this one seemed most accurate
+// https://stackoverflow.com/questions/4187146/truncate-number-to-two-decimal-places-without-rounding/11818658
+function toFixedTrunc(value, n) {
+    const v = value.toString().split('.');
+    if (n <= 0) return v[0];
+    let f = v[1] || '';
+    if (f.length > n) return `${v[0]}.${f.substr(0,n)}`;
+    while (f.length < n) f += '0';
+    return `${v[0]}.${f}`
 }
 
 init();
