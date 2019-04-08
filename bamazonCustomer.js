@@ -27,6 +27,7 @@ function displayItems(){
         });
 }
 
+// Prompts the user for the id of the item they'd like to purchase
 function selectItem() {
     inquirer
         .prompt([
@@ -45,6 +46,7 @@ function selectItem() {
         });
 }
 
+// Prompts the user for the quantity of the item they'd like to purchase
 function selectQuantity(id){
     inquirer
         .prompt([
@@ -64,7 +66,6 @@ function selectQuantity(id){
 }
 
 function validateOrder(id,quantity){
-//console.log("You'd like to buy item with id: " + id + " and quantity: " + quantity);
     connection.query({
         sql: 'SELECT * FROM products WHERE stock_quantity >= ? AND item_id=?',
         values: [quantity,id]
@@ -78,8 +79,7 @@ function validateOrder(id,quantity){
             }
             var totalPrice = toFixedTrunc((parseFloat(results[0].price)*quantity),2);
             var newQuantity = results[0].stock_quantity-quantity;
-            var newSales = results[0].product_sales+totalPrice;
-            //console.log("New item quantity will be: " + newQuantity);
+            var newSales = parseFloat(results[0].product_sales)+parseFloat(totalPrice);
             console.log("Your order costs a total of: $" + totalPrice);
             updateDb(newQuantity,id,newSales);
         });
