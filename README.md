@@ -10,12 +10,13 @@ node application with sql
 - you'll need to supply your own database password in bamazonCustomer.js, bamazonManager.js, and bamazonSupervisor.js
 - ``` node <program>```
 
-### Programs
-- ```bamazonCustomer```
- A customer can enter the id of the item they'd like to purchase and then enters the quantity they'd like to purchase. The console lets the user know how much their purchase costs if the request was valid.
+## Programs
+```bamazonCustomer```  
+ - A customer can enter the id of the item they'd like to purchase and then enters the quantity they'd like to purchase. The console lets the user know how much their purchase costs if the request was valid.    
+ - The program initializes with a listing of all items for sale with quantity greater than 0.
  ### Images
  <img src="images/customer1.png" alt="customer1 image">
  
-- ```bamazonManager```
+```bamazonManager```
 
-- ```bamazonSupervisor```
+```bamazonSupervisor```
