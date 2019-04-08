@@ -7,7 +7,8 @@ node application with sql
 - [console.table](https://www.npmjs.com/package/console.table)
 
 ## Running the application
-``` node <program>```
+- you'll need to supply your own database password in bamazonCustomer.js, bamazonManager.js, and bamazonSupervisor.js
+- ``` node <program>```
 
 ### Programs
 - ```bamazonCustomer```
