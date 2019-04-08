@@ -53,7 +53,7 @@ function displayProducts(){
         function (error, results) {
             if (error) throw error;
             results.forEach(element => {
-                console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: $" + element.price + "|| Quantity: " + element.stock_quantity);
+                console.log("Item ID: " + element.item_id + " || Item: " + element.product_name + " || Price: $" + element.price + "|| Quantity: " + element.stock_quantity + " || Product Sales: " + element.product_sales);
             });
             openingFunctions();
         });

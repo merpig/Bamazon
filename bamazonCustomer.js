@@ -76,17 +76,19 @@ function validateOrder(id,quantity){
                 connection.end();
                 return;
             }
+            var totalPrice = toFixedTrunc((parseFloat(results[0].price)*quantity),2);
             var newQuantity = results[0].stock_quantity-quantity;
+            var newSales = results[0].product_sales+totalPrice;
             //console.log("New item quantity will be: " + newQuantity);
-            console.log("Your order costs a total of: $" + toFixedTrunc((parseFloat(results[0].price)*quantity),2));
-            updateDb(newQuantity,id);
+            console.log("Your order costs a total of: $" + totalPrice);
+            updateDb(newQuantity,id,newSales);
         });
 }
 
-function updateDb(newQuantity,id){
+function updateDb(newQuantity,id,newSales){
     connection.query({
-        sql: 'UPDATE products SET stock_quantity=? WHERE item_id=?',
-        values: [newQuantity,id]
+        sql: 'UPDATE products SET stock_quantity=?,product_sales=? WHERE item_id=?',
+        values: [newQuantity, newSales,id]
     },
         function (error, results) {
             if (error) throw error;
