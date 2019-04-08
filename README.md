@@ -19,7 +19,7 @@ node application with sql
  <hr>  
  
   ```bamazonManager```  
-- A manager has 5 functions to work with:  
+- A manager has 4 functions to work with:  
 ```View Product for Sale``` Displays a listing of all items for sale.  
 ```View Low Inventory``` Displays a listing off items for sale with quantity less than 5.  
 ```Add to inventory``` Allows the manager to increase the quantity of an item by giving the program the item id and the amount to be added.  
@@ -32,4 +32,11 @@ node application with sql
 <img src="images/manager4.png" alt="manager4 image">  
 <img src="images/manager5.png" alt="manager5 image">  
 <hr>  
-```bamazonSupervisor```
+
+  ```bamazonSupervisor```  
+  - A Supervisor has 2 functions to work with:  
+  ```View Product Sale by Department``` Displays a listing of all department along with overhead costs, sales, and total profit.  
+  ```Create New Department``` Allows the supervisor to add a new department by adding department name and overhead.  
+  
+  ### Images  
+  
