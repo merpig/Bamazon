@@ -14,7 +14,7 @@ node application with sql
 ```bamazonCustomer```  
  - A customer can enter the id of the item they'd like to purchase and then enters the quantity they'd like to purchase. The console lets the user know how much their purchase costs if the request was valid.    
  - The program initializes with a listing of all items for sale with quantity greater than 0.
- ### Images
+ ### Customer Images
  <img src="images/customer1.png" alt="customer1 image">
  <hr>  
  
@@ -25,7 +25,7 @@ node application with sql
 ```Add to inventory``` Allows the manager to increase the quantity of an item by giving the program the item id and the amount to be added.  
 ```Add new Product``` Allows the manager to add a new product by entering product name,department,price, and quantity.  
 
-### Images  
+### Manager Images  
 <img src="images/manager1.png" alt="manager1 image">  
 <img src="images/manager2.png" alt="manager2 image">  
 <img src="images/manager3.png" alt="manager3 image">  
@@ -38,5 +38,5 @@ node application with sql
   ```View Product Sale by Department``` Displays a listing of all department along with overhead costs, sales, and total profit.  
   ```Create New Department``` Allows the supervisor to add a new department by adding department name and overhead.  
   
-  ### Images  
+  ### Supervisor Images  
   
