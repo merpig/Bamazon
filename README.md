@@ -39,4 +39,6 @@ node application with sql
   ```Create New Department``` Allows the supervisor to add a new department by adding department name and overhead.  
   
   ### Supervisor Images  
-  
+  <img src="images/supervisor1.png" alt="supervisor1 image">  
+  <img src="images/supervisor2.png" alt="supervisor2 image">  
+  <img src="images/supervisor3.png" alt="supervisor3 image">  
