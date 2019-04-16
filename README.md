@@ -19,7 +19,7 @@ node application with sql
  <hr>  
  
   ```bamazonManager```  
-- A manager has 4 functions to work with:  
+- A manager has 4 functions to work with:
 ```View Product for Sale``` Displays a listing of all items for sale.  
 ```View Low Inventory``` Displays a listing off items for sale with quantity less than 5.  
 ```Add to inventory``` Allows the manager to increase the quantity of an item by giving the program the item id and the amount to be added.  
